@@ -20,7 +20,7 @@ class NavBarComponent extends Component{
   render (){
     const comp = (
       <div>
-        <Navbar color="dark" dark expand="sm">
+        <Navbar fixed="top" color="dark" dark expand="sm">
           <NavbarBrand href="/" className="mr-auto">E-Wallet</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
