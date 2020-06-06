@@ -17,7 +17,8 @@ class Profile extends Component{
     componentWillMount=async()=>{
         
         const requestBody = {
-            email:this.context.userEmail
+            email:this.context.userEmail,
+            token:this.context.token
         }
         const data = await API.post('getprofile', requestBody);
         this.setState({cost:1});

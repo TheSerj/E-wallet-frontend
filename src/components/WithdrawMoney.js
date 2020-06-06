@@ -12,7 +12,8 @@ class AddMoney extends Component{
         e.preventDefault();
         const requestBody = {
             email: this.context.userEmail,
-            amount: parseInt(e.target.amount.value)
+            amount: parseInt(e.target.amount.value),
+            token:this.context.token
         }
         const data = await API.post('/withdrawmoney', requestBody);
         this.props.func();

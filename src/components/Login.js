@@ -16,7 +16,6 @@ const Login=()=>{
             email: e.target.email.value,
             password: e.target.password.value
         }
-
         const data = await API.post('/login', requestBody);
         if(data.data.token){
             let hr = 1/24;

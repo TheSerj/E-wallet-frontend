@@ -13,7 +13,8 @@ class History extends Component{
     static contextType = AuthContext;
     componentWillMount=async()=>{
         const requestBody = {
-            email:this.context.userEmail
+            email:this.context.userEmail,
+            token:this.context.token
         }
         const data = await API.post('getprofile', requestBody);
         this.setState({transactions:data.data.transHistory.reverse().slice(0,10)});

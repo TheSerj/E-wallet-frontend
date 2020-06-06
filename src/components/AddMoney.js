@@ -10,7 +10,8 @@ const AddMoney =(props)=>{
         e.preventDefault();
         const requestBody = {
             email: contextValue.userEmail,
-            amount: parseInt(e.target.amount.value)
+            amount: parseInt(e.target.amount.value),
+            token:contextValue.token
         }
         const data = await API.post('/addmoney', requestBody);
         props.func();

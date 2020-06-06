@@ -12,7 +12,7 @@ class App extends Component{
     this.state={
       islogged : false,
       userEmail:"null",
-
+      token:"null"
     }
   }
   toggleLogin=()=>{
@@ -20,7 +20,7 @@ class App extends Component{
   }
   componentWillMount=()=>{
     if(Cookie.get('token')){
-      this.setState({islogged:true, userEmail:Cookie.get('email')}); 
+      this.setState({islogged:true, userEmail:Cookie.get('email'), token:Cookie.get('token')}); 
     }else{
       console.log("logout");
       this.setState({islogged:false, userEmail:"null"});
@@ -34,7 +34,8 @@ class App extends Component{
         {isLogged:this.state.islogged,
         toggleLogin:this.toggleLogin,
         userEmail:this.state.userEmail,
-        mountComp:this.componentWillMount
+        mountComp:this.componentWillMount,
+        token:this.state.token
         }}>
         <Main />
       </AuthContext.Provider>
