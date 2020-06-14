@@ -16,18 +16,19 @@ const Login=()=>{
             email: e.target.email.value,
             password: e.target.password.value
         }
-        console.log(API);
+    
         const data = await API.post('/login', requestBody);
+        
         if(data.data.token){
             let hr = 1/24;
             Cookie.set("token", data.data.token, { expires:2*hr});
             Cookie.set("email", data.data.email, { expires:2*hr });
-            contextValue.mountComp();
+            contextValue.mountComp().then(()=>{
+                toggleModal();
+            });
         }else{
             console.log("worng info bro");
         }
-
-        toggleModal();
 
     }
     const comp = (

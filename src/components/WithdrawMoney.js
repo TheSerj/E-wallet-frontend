@@ -15,8 +15,9 @@ class AddMoney extends Component{
             amount: parseInt(e.target.amount.value),
             token:this.context.token
         }
-        const data = await API.post('/withdrawmoney', requestBody);
-        this.props.func();
+        API.post('/withdrawmoney', requestBody).then(()=>{
+            this.context.toggleBalance(-requestBody.amount);
+        })
         
     }
     render(){

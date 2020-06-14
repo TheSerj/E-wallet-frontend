@@ -18,6 +18,7 @@ class NavBarComponent extends Component{
     this.setState({collapsed:!this.state.collapsed});
   }
   render (){
+    if(!this.context.loading)return null;
     const comp = (
       <div>
         <Navbar fixed="top" color="dark" dark expand="sm">

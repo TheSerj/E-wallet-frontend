@@ -7,6 +7,7 @@ export default React.createContext({
     token:null,
     balance:null,
     history:null,
+    loading:null,
     toggleLogin:()=>{},
     toggleBalance:()=>{},
     mountComp:()=>{}

@@ -13,8 +13,10 @@ const AddMoney =(props)=>{
             amount: parseInt(e.target.amount.value),
             token:contextValue.token
         }
-        const data = await API.post('/addmoney', requestBody);
-        props.func();
+        API.post('/addmoney', requestBody).then(()=>{
+            contextValue.toggleBalance(requestBody.amount);
+        })
+        
     }
     const comp = (
         <Form onSubmit={handleSubmit}>

@@ -20,11 +20,11 @@ class History extends Component{
         this.setState({transactions:data.data.transHistory.reverse().slice(0,10)});
     }
     render(){
-        const History = this.state.transactions.map((transaction)=>{
+        const History = this.state.transactions.map((transaction, id)=>{
             const date = transaction.date.split('T')[0];
             const time = transaction.date.split('T')[1].split('.')[0];
             return(
-                <ListGroupItem >
+                <ListGroupItem key={id}>
                     <ListGroupItemHeading>Amount : <strong>{transaction.amount}</strong></ListGroupItemHeading>
                     <ListGroupItemText>
                         {transaction.transType.split(' ')[1]} at {time} on {date}

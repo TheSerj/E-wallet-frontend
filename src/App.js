@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContext from './contexts/AuthContext';
 import Main from './components/Main';
 import Cookie from "js-cookie";
+import API from './utils/API';
 
 class App extends Component{
   constructor(props){
@@ -14,7 +15,8 @@ class App extends Component{
       userEmail:null,
       username:null,
       balance:null,
-      token:null
+      token:null,
+      made:0
     }
   }
   toggleLogin=()=>{
@@ -24,19 +26,30 @@ class App extends Component{
     console.log(k);
     this.setState({balance:this.state.balance+k});
   }
-  componentWillMount=(e)=>{
+  componentWillMount=async()=>{
     if(Cookie.get('token')){
-      this.setState({islogged:true, userEmail:Cookie.get('email'), token:Cookie.get('token')}); 
+      const requestBody = {
+        email:Cookie.get('email'),
+        token:Cookie.get('token')
+      }
+      const data = await API.post('getprofile', requestBody);
+      await this.setState({username:data.data.name, balance:data.data.balance, made:1});
+      await this.setState({islogged:true, userEmail:Cookie.get('email'), token:Cookie.get('token'), made:1});
+
+
     }else{
       console.log("please login");
-      this.setState({islogged:false, userEmail:"null"});
+      this.setState({islogged:false, userEmail:"null", made:1});
     }
+
   }
   
   render(){
+    
     return (
       <AuthContext.Provider value={
         {isLogged:this.state.islogged,
+        loading:this.state.made,
         toggleLogin:this.toggleLogin,
         token:this.state.token,
         userEmail:this.state.userEmail,
