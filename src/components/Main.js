@@ -8,15 +8,10 @@ import History from './History';
 class Main extends Component{
   constructor(props){
     super(props);
-    this.state={
-      logged:false
-    }
   }
+  
   static contextType = AuthContext;
-  componentWillMount=()=>{
-    this.setState({logged:this.context.isLogged});
-    
-  }  
+
 
   render(){
     var ProfileComponent, HistoryComponent;

@@ -11,21 +11,26 @@ class App extends Component{
     super(props);
     this.state={
       islogged : false,
-      userEmail:"null",
-      token:"null"
+      userEmail:null,
+      username:null,
+      balance:null,
+      token:null
     }
   }
   toggleLogin=()=>{
     this.setState({islogged:!this.state.islogged});
   }
-  componentWillMount=()=>{
+  toggleBalance=(k)=>{
+    console.log(k);
+    this.setState({balance:this.state.balance+k});
+  }
+  componentWillMount=(e)=>{
     if(Cookie.get('token')){
       this.setState({islogged:true, userEmail:Cookie.get('email'), token:Cookie.get('token')}); 
     }else{
-      console.log("logout");
+      console.log("please login");
       this.setState({islogged:false, userEmail:"null"});
     }
-
   }
   
   render(){
@@ -33,9 +38,12 @@ class App extends Component{
       <AuthContext.Provider value={
         {isLogged:this.state.islogged,
         toggleLogin:this.toggleLogin,
+        token:this.state.token,
         userEmail:this.state.userEmail,
         mountComp:this.componentWillMount,
-        token:this.state.token
+        username:this.state.username,
+        balance:this.state.balance,
+        toggleBalance:this.toggleBalance
         }}>
         <Main />
       </AuthContext.Provider>
